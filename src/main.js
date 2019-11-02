@@ -4,11 +4,36 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+// 注册elm-ui
+Vue.use(ElementUI);
 
 //绑定到原型上
 Vue.prototype.$axios=axios;
 //设置基准路径
-axios.defaults.baseURL="http://111.230.181.206:3000"
+axios.defaults.baseURL="http://111.230.181.206:3000";
+
+//设置路由守卫
+router.beforeEach((to, from, next) => {
+  let token=localStorage.getItem('token');
+
+  let goToAuthority=[
+    '/'
+  ]
+
+  if(goToAuthority.includes(to.path)){
+    if(token){
+      next();
+    }else{
+      next('/login');
+      // router.replace('/login');
+    }
+  }else{
+    next();
+  }
+})
 
 Vue.config.productionTip = false
 
