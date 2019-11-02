@@ -3,6 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios';
+
+//绑定到原型上
+Vue.prototype.$axios=axios;
+//设置基准路径
+axios.defaults.baseURL="http://111.230.181.206:3000"
 
 Vue.config.productionTip = false
 
