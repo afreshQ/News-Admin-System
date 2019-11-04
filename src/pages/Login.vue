@@ -101,7 +101,7 @@
                 let user=res.data.data.user;
 
                 localStorage.setItem('token',token);
-                localStorage.setItem('userId',JSON.stringify(user));
+                localStorage.setItem('user',JSON.stringify(user));
 
                 setTimeout(()=>{
                     this.$router.push('/')
