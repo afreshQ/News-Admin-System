@@ -21,12 +21,16 @@
               active-text-color="#f56c6c"
               default-active="1"
             >
-              <el-menu-item index="1" @click="toMain('/postlist')">
-                <i class="el-icon-menu"></i>
+              <el-menu-item index="1" @click="toMain('/')">
+                <i class="el-icon-s-home"></i>
+                <span slot="title">首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              </el-menu-item>
+              <el-menu-item index="2" @click="toMain('/postlist')">
+                <i class="el-icon-s-platform"></i>
                 <span slot="title">文章列表</span>
               </el-menu-item>
-              <el-menu-item index="2" @click="toMain('/postarticle')">
-                <i class="el-icon-location"></i>
+              <el-menu-item index="3" @click="toMain('/postarticle')">
+                <i class="el-icon-s-promotion"></i>
                 <span slot="title">发布文章</span>
               </el-menu-item>
             </el-menu>
