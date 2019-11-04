@@ -7,7 +7,7 @@
         </el-col>
         <el-col :span="8"></el-col>
         <el-col :span="8" class="userInfo">
-          <img class="avatar" :src="$axios.defaults.baseURL+userInfo.head_img" alt />
+          <el-avatar class="avatar" shape="square" :size="50" :src="$axios.defaults.baseURL+userInfo.head_img"></el-avatar>
           <div class="nickname">{{userInfo.nickname}}</div>
         </el-col>
       </el-row>
@@ -103,9 +103,7 @@ export default {
     align-items: center;
     justify-content: flex-end;
     .avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+
       margin-right: 15px;
     }
     .nickname{
