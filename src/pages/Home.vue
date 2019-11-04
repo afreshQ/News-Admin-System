@@ -8,7 +8,7 @@
         <el-col :span="8"></el-col>
         <el-col :span="8" class="userInfo">
           <img class="avatar" :src="$axios.defaults.baseURL+userInfo.head_img" alt />
-          <div>{{userInfo.nickname}}</div>
+          <div class="nickname">{{userInfo.nickname}}</div>
         </el-col>
       </el-row>
     </el-header>
@@ -107,6 +107,11 @@ export default {
       width: 50px;
       height: 50px;
       border-radius: 50%;
+      margin-right: 15px;
+    }
+    .nickname{
+      color: #fff;
+      font-weight: 600;
     }
   }
 }
