@@ -12,16 +12,19 @@ export default new Router({
     {
       path: '/',
       name: 'home',
+      meta: '首页',
       component: Home,
       children:[
         {
           path: '/postlist',
           name: 'postList',
+          meta: '文章列表',
           component: PostList,
         },
         {
           path: '/postarticle',
           name: 'postArticle',
+          meta: '发布文章',
           component: PostArticle,
         }
       ]

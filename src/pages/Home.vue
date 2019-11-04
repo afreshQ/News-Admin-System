@@ -34,6 +34,7 @@
         </el-row>
       </el-aside>
       <el-main>
+        <BreadCrumbs/>
         <router-view/>
       </el-main>
     </el-container>
@@ -41,7 +42,11 @@
 </template>
 
 <script>
+import BreadCrumbs from '../components/BreadCrumbs';
 export default {
+  components:{
+    BreadCrumbs
+  },
   data() {
     return {
       userInfo: JSON.parse(localStorage.getItem("user"))
@@ -49,8 +54,9 @@ export default {
   },
   methods: {
     toMain(path){
-      this.$router.push(path)
-    }
+      if(path!=this.$route.path)
+        this.$router.push(path)
+      }
   },
 
   created() {
@@ -110,8 +116,6 @@ export default {
 .el-main {
   background-color: #fff;
   color: #333;
-  text-align: center;
-  line-height: 160px;
 }
 
 body > .el-container {
