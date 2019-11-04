@@ -19,7 +19,7 @@
             <el-menu
               class="el-menu-vertical-demo"
               active-text-color="#f56c6c"
-              default-active="1"
+              :default-active="defaultActive"
             >
               <el-menu-item index="1" @click="toMain('/')">
                 <i class="el-icon-s-home"></i>
@@ -53,7 +53,8 @@ export default {
   },
   data() {
     return {
-      userInfo: JSON.parse(localStorage.getItem("user"))
+      userInfo: JSON.parse(localStorage.getItem("user")),
+      defaultActive:this.$route.path=='/postlist'?'2':this.$route.path=='/postarticle'?'3':'1'
     };
   },
   methods: {
