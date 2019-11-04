@@ -18,7 +18,6 @@
           <el-col :span="24">
             <el-menu
               class="el-menu-vertical-demo"
-              active-text-color="#f56c6c"
               :default-active="defaultActive"
             >
               <el-menu-item index="1" @click="toMain('/')">
@@ -79,7 +78,7 @@ export default {
   left: 0;
 }
 .el-header {
-  background-color: #f56c6c;
+  background-color: #409eff;
   color: #333;
   text-align: center;
   line-height: 60px;
@@ -117,7 +116,7 @@ export default {
 }
 
 .el-aside {
-  background-color: #fde2e2;
+  background-color: #a0cfff;
   color: #333;
   text-align: center;
   line-height: 200px;

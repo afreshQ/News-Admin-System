@@ -112,32 +112,3 @@ el-table {
 }
 </style>
 
-
-<style lang="less">
-//修改组件库的样式
-.el-pagination{
-    li:hover{
-        color: #f56d6d !important;
-    }
-    .active{
-        background-color: #f56d6d !important;
-        &:hover{
-            color: #fff !important;
-
-        }
-    }
-
-}
-.el-select-dropdown{
-        .el-select-dropdown__item.selected{
-            color: #f56d6d !important;
-        }
-}
-
-
-.el-select .el-input.is-focus .el-input__inner,
-.el-pagination__sizes .el-input .el-input__inner:hover,
-.el-select .el-input__inner:focus {
-    border-color: #f56d6d !important;
-}
-</style>

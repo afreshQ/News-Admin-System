@@ -13,9 +13,7 @@ export default {
         this.$route.matched.forEach(element => {
             breadCrumbstr+=element.meta+' / '
         });
-        
-        console.log(breadCrumbstr);
-        
+                
         return breadCrumbstr;
         }
     }
