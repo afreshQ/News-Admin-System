@@ -45,14 +45,19 @@ export default {
           method:'get'
       }).then(res=>{
           let {data}=res.data;
-
-          console.log(data);
-          this.categoryList=data;
+          
+          //忽略关注和热点这两个栏目
+          data.forEach(element => {
+            if(element.id!=0 && element.id!=999){
+              this.categoryList.push(element);
+            }
+          });
+          console.log(this.categoryList);
+          // this.categoryList=data;
       })
   },
   methods: {
     onSubmit() {
-      console.log("submit!");
       console.log(this.form);
       
     }
