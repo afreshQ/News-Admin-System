@@ -15,6 +15,15 @@ Vue.prototype.$axios=axios;
 //设置基准路径
 axios.defaults.baseURL="http://111.230.181.206:3000";
 
+//使用请求拦截器
+axios.interceptors.request.use((config)=>{
+  // 如果请求没有带上Authorization，并且本地存储存在token，就加上去
+  if(!config.headers.Authorization && localStorage.getItem('token')){
+    config.headers.Authorization=localStorage.getItem('token');
+  }
+  return config;
+})
+
 //设置一个添加基准路径的公共方法
 Vue.prototype.$fullImageSrc=(src)=>{
     return src.includes('http')? src:axios.defaults.baseURL+src;
