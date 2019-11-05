@@ -15,6 +15,11 @@ Vue.prototype.$axios=axios;
 //设置基准路径
 axios.defaults.baseURL="http://111.230.181.206:3000";
 
+//设置一个添加基准路径的公共方法
+Vue.prototype.$fullImageSrc=(src)=>{
+    return src.includes('http')? src:axios.defaults.baseURL+src;
+}
+
 //设置路由守卫
 router.beforeEach((to, from, next) => {
   let token=localStorage.getItem('token');

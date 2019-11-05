@@ -14,12 +14,17 @@
       <el-table-column label="缩略图" width="200">
         <template slot-scope="item">
           <span>
-            <img class="thumbnail" :src="item.row.cover[0].url" alt />
+            <img class="thumbnail" :src="$fullImageSrc(item.row.cover[0].url)" alt />
           </span>
         </template>
       </el-table-column>
+      <el-table-column label="作者" width="150">
+        <template slot-scope="item">
+          <span>{{item.row.user.nickname}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作">
-        <template slot-scope="scope">
+        <template>
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
@@ -79,7 +84,7 @@ export default {
       }).then(res => {
         let { data } = res.data;
 
-        // console.log(data);
+        console.log(data);
         this.postLists = data;
       });
     },
