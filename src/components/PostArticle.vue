@@ -15,7 +15,12 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="内容">
-        <el-input type="textarea" v-model="form.content"></el-input>
+         <vue-editor 
+            v-model="form.content"
+            :useCustomImageHandler="true"
+            @image-added="imgUpload"
+            :editorToolbar="customToolbar"
+            ></vue-editor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">发布</el-button>
@@ -25,7 +30,11 @@
 </template>
 
 <script>
+import {VueEditor} from 'vue2-editor';
 export default {
+  components:{
+    VueEditor
+  },
   data() {
     return {
       form: {
@@ -36,7 +45,10 @@ export default {
       },
 
       //这里是获取到的全部分类
-      categoryList:[]
+      categoryList:[],
+
+      //富文本配置
+      customToolbar: [["bold", "italic", "underline"], [{ list: "ordered" }, { list: "bullet" }], ["image", "code-block"]]
     };
   },
   created(){
@@ -52,7 +64,7 @@ export default {
               this.categoryList.push(element);
             }
           });
-          console.log(this.categoryList);
+          // console.log(this.categoryList);
           // this.categoryList=data;
       })
   },
@@ -60,6 +72,32 @@ export default {
     onSubmit() {
       console.log(this.form);
       
+    },
+
+    imgUpload(file, Editor, cursorLocation, resetUploader){
+      
+      //把选择的文件转成二进制
+      let Imgdata=new FormData();
+      Imgdata.append('file',file);
+
+      this.$axios({
+        url:'/upload',
+        method:'post',
+        data:Imgdata
+       
+      }).then(res=>{
+        let {message,data}=res.data;
+        console.log(message);
+        
+        let url=this.$axios.defaults.baseURL + data.url;
+
+        //插入光标所在的位置
+        Editor.insertEmbed(cursorLocation, "image", url);
+
+        //重置上传图片的功能
+        resetUploader();
+        
+      })
     }
   }
 };
