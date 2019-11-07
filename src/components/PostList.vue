@@ -14,7 +14,7 @@
       <el-table-column label="缩略图" width="200">
         <template slot-scope="item">
           <span>
-            <img class="thumbnail" :src="$fullImageSrc(item.row.cover[0].url)" alt />
+            <img class="thumbnail" :src="item.row.cover.length>0?$fullImageSrc(item.row.cover[0].url):''" alt />
           </span>
         </template>
       </el-table-column>
@@ -24,8 +24,8 @@
         </template>
       </el-table-column>
       <el-table-column label="操作">
-        <template>
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <template slot-scope="item">
+          <el-button size="mini" @click="handleEdit(item.$index, item.row)">编辑</el-button>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
@@ -38,7 +38,7 @@
     :page-sizes="[3, 5, 10]"
     :page-size="pageSize"
     layout="sizes, prev, pager, next"
-    :total="11"
+    :total="60"
     ></el-pagination>
   </div>
 </template>
@@ -65,14 +65,19 @@ export default {
       }
   },
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
+    handleEdit(index,row) {
+      this.$router.push({
+        name:'postArticle',
+        query:{
+          id:row.id
+        }
+      })
     },
     handleDelete(index, row) {
       console.log(index, row);
     },
 
-    //获取全部文章
+    //获取文章
     getPostsList(pageIndex) {
       this.$axios({
         url: "/post",

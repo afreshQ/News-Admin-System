@@ -55,6 +55,8 @@ export default {
   },
   data() {
     return {
+      postId:this.$route.query.id,
+
       form: {
         title: "",
         categories: [],
@@ -77,6 +79,7 @@ export default {
     };
   },
   created() {
+    
     this.$axios({
       url: "/category",
       method: "get"
@@ -89,9 +92,42 @@ export default {
           this.categoryList.push(element);
         }
       });
-      // console.log(this.categoryList);
-      // this.categoryList=data;
     });
+
+
+      console.log(this.postId);
+    // 判断有没有id传过来,有就代表是编辑页
+    if(this.postId){
+      //请求数据
+      this.$axios({
+        url:'/post/'+this.postId,
+        method:'get'
+      }).then(res=>{
+        console.log(res.data);
+        let {data}=res.data;
+
+        //改成能渲染到页面的[id1，id2]
+        let newCategories=[];
+        data.categories.forEach(element => {
+          newCategories.push(element.id)
+        });
+        data.categories=newCategories;
+
+        //图片加上基准路径
+        data.cover.forEach(element=>{
+          element.url=this.$axios.defaults.baseURL+element.url;
+        })
+        
+        //富文本只能识别p编辑，所以这里把div替换p
+        data.content.replace(/div/g,'p');
+
+        //赋值给form
+        this.form=data;
+
+        console.log(this.form);
+        
+      })
+    }
   },
   methods: {
     onSubmit() {
@@ -107,11 +143,15 @@ export default {
       console.log(this.form);
 
       this.$axios({
-        url: "/post",
+        url: this.postId?"/post_update/"+this.postId:"/post",
         method: "post",
         data: this.form
       }).then(res => {
-        console.log(res.data);
+        // console.log(res.data);
+
+        let {message}=res.data;
+        console.log(message);
+        
       });
     },
 
@@ -148,7 +188,7 @@ export default {
         url: this.$axios.defaults.baseURL + res.data.url
       });
 
-      console.log(this.form);
+      // console.log(this.form);
     },
 
     //文件列表移除文件时的钩子
